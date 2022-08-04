@@ -5,7 +5,7 @@
 
 This project aims at creating an excel file called *DataSport* to keep visible and organized all my workouts. I want to be able to see the relevant data of my training without being forced to follow the schemes of TrainingPeaks or Garmin. I want everything easy for reviews in one single place.
 
-## Where the data will came from
+## Where the data will come from
 The main source of data will be from the TrainingPeaks .csv files. It could be possible to implement the database with data from Gramin Connect .csv files in order to collect more informations and provide a more detailed Recap.
 
 ## How the excel file will be organized
