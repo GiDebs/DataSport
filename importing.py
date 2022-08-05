@@ -3,7 +3,9 @@
 #STEP 1 - create the GUI (Graphical User Interface) in order to allow the user to interact with the code
 
 # Create a window object
-from tkinter import *
+from tkinter import * # Import everything from the library tkinter
+from pandas import*
+from plotly import*
 
 app = Tk()
 app.title('Import Data')

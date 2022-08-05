@@ -18,3 +18,7 @@ The main source of data will be from the TrainingPeaks .csv files. It could be p
 
 ### **Useful Links for the beginner me**
 [Basic writing and formatting syntax of GitHub](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+
+[Commands and arguments of GUI Tkinter library](http://tkdocs.com/tutorial/widgets.html)
+
+[Introduction to Pandas library for data analysis](https://pandas.pydata.org/docs/user_guide/10min.html)
