@@ -22,3 +22,9 @@ The main source of data will be from the TrainingPeaks .csv files. It could be p
 [Commands and arguments of GUI Tkinter library](http://tkdocs.com/tutorial/widgets.html)
 
 [Introduction to Pandas library for data analysis](https://pandas.pydata.org/docs/user_guide/10min.html)
+
+[Dash Components](https://dash.plotly.com/dash-core-components)
+
+[Dash Charts](https://plotly.com/python/)
+
+[Dash Callbacks](https://dash.plotly.com/basic-callbacks)
