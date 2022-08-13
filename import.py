@@ -34,4 +34,5 @@ directory = Entry(frame2, textvariable="belin")
 #packing in frame 2
 Importbtn.grid(row=1, column=1)
 directory.grid(row=0, column=0)
+
 root.mainloop()
