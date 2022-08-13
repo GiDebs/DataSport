@@ -2,6 +2,7 @@
 #I ask to select the database .csv
 #Then I import it in web_app
 
+from binhex import getfileinfo
 from tkinter import*
 from tkinter import filedialog
 from tkinter.ttk import Labelframe
@@ -12,7 +13,7 @@ root.geometry("700x200")
 root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\AtlLev.ico")
 
 def Openfile():
-    filename = filedialog.askopenfilenames(initialdir="\Origini ", 
+    filename = filedialog.askopenfilenames(initialdir="\Desktop ", 
     title="Seleziona file", filetypes=(("Formato testo","*.csv"),("All Files","*.*")))
 
 #Frame 1
@@ -20,9 +21,11 @@ frame1 = LabelFrame(root, text="Selezione")
 frame1.pack(fill='x', padx=10, pady=10)
 #defining objects in frame 1
 label1 = Label(frame1, text="Percorso File:")
+directory1 = Entry(frame1)
 Selectbtn = Button(frame1, text="Seleziona file", command= Openfile)
 #packing in frame 1
 label1.grid(row=0, column=0)
+directory1.grid(row=0, column=1)
 Selectbtn.grid(row=1, column=1)
 
 # Frame 2
