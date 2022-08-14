@@ -2,40 +2,62 @@
 #I ask to select the database .csv
 #Then I import it in web_app
 
-from binhex import getfileinfo
+#from binhex import getfileinfo
+from textwrap import fill
 from tkinter import*
 from tkinter import filedialog
-from tkinter.ttk import Labelframe
+#from tkinter.ttk import Labelframe
+from PIL import Image,ImageTk
 
 root = Tk()
 root.title("Importazione dati")
-root.geometry("700x200")
-root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\AtlLev.ico")
+root.geometry("680x220")
+root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\Icons\AtlLev1.ico")
 
 def Openfile():
     filename = filedialog.askopenfilenames(initialdir="\Desktop ", 
     title="Seleziona file", filetypes=(("Formato testo","*.csv"),("All Files","*.*")))
 
-#Frame 1
-frame1 = LabelFrame(root, text="Selezione")
-frame1.pack(fill='x', padx=10, pady=10)
-#defining objects in frame 1
-label1 = Label(frame1, text="Percorso File:")
-directory1 = Entry(frame1)
-Selectbtn = Button(frame1, text="Seleziona file", command= Openfile)
-#packing in frame 1
-label1.grid(row=0, column=0)
-directory1.grid(row=0, column=1)
-Selectbtn.grid(row=1, column=1)
+# Add Image to the left
+#Create a canvas
+canvas= Canvas(root, width= 310, height= 210)
+canvas.grid(row=0, rowspan=10, column=0)
+#Load an image in the script
+img= (Image.open(r"C:\Users\Giulio\Documents\GitHub\DataSport\Icons\LOGO-ATLETICA-LEVANTE.png"))
+#Resize the Image using resize method
+resized_image= img.resize((300,200), Image.Resampling.LANCZOS )
+new_image= ImageTk.PhotoImage(resized_image)
+#Add image to the Canvas Items
+canvas.create_image(10,10, anchor=NW, image=new_image)
 
-# Frame 2
-frame2 = Labelframe(root, text="Importazione")
-frame2.pack(fill='x', padx=10, pady=10)
-##defining objects in frame 2
-Importbtn = Button(frame2,text="Importa")
-directory = Entry(frame2, textvariable="belin")
+#Frame 1
+frame1 = LabelFrame(root)
+frame1.grid(row=0, column=1, padx=10, pady=10)
+#defining objects in frame 1
+label1 = Label(frame1, text="Importa nuovi dati da PC", font='Helvetica 11 bold')
+Selectbtn = Button(frame1, text="Seleziona file", command= Openfile, borderwidth=2, font='Helvetica 10')
+#packing in frame 1
+label1.grid(row=0, column=0, padx=10, pady=10)
+Selectbtn.grid(row=0, column=1, padx=10, pady=10)
+
+#Frame 2
+frame2 = LabelFrame(root)
+frame2.grid(row=1, column=1, padx=10, pady=10)
+#defining objects in frame 1
+label2 = Label(frame2, text="Vedere analisi                      ", font='Helvetica 11 bold')
+Dashbtn = Button(frame2, text="Dashboard", font='Helvetica 10')
 #packing in frame 2
-Importbtn.grid(row=1, column=1)
-directory.grid(row=0, column=0)
+label2.grid(row=0, column=0, padx=10, pady=10)
+Dashbtn.grid(row=0, column=1, padx=10, pady=10)
+
+#Frame 3
+frame3 = LabelFrame(root)
+frame3.grid(row=2, column=1, padx=10, pady=10)
+#defining objects in frame 1
+label3 = Label(frame3, text="Uscire dal programma                  ", font='Helvetica 11 bold')
+Extbtn = Button(frame3, text="Exit", font='Helvetica 10', command=root.destroy)
+#packing in frame 2
+label3.grid(row=0, column=0, padx=10, pady=10)
+Extbtn.grid(row=0, column=1, padx=10, pady=10)
 
 root.mainloop()
