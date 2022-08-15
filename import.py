@@ -1,8 +1,11 @@
 #setting up the GUI interface in which 
-#I ask to select the database .csv
+#I ask to select the database .csv for the import
 #Then I import it in web_app
 
 #from binhex import getfileinfo
+from importlib.resources import path
+import ntpath
+import shutil
 from textwrap import fill
 from tkinter import*
 from tkinter import filedialog
@@ -13,11 +16,22 @@ root = Tk()
 root.title("Importazione dati")
 root.geometry("680x220")
 root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\Icons\AtlLev1.ico")
+# Create a class which include different global variables
+class Globals:
+    filename = None
 
+# Fuunction that ask the path of the new origin and save it in the Origin directory
 def Openfile():
-    filename = filedialog.askopenfilenames(initialdir="\Desktop ", 
+    Globals.filename = filedialog.askopenfilenames(initialdir="\Desktop ", 
     title="Seleziona file", filetypes=(("Formato testo","*.csv"),("All Files","*.*")))
-
+    origin = str(Globals.filename)
+    origin1 = origin.replace("(","").replace(",", "").replace(")", "").replace("/", "\\").replace("'","")
+    origin2 = ntpath.basename(origin1)
+    targhet = "C:/Users/Giulio/Documents/GitHub/DataSport/Origini" + "/" + origin2
+    targhet1 = targhet.replace("/", "\\")
+    print(targhet1)
+    shutil.copyfile(origin1, targhet1)
+#
 # Add Image to the left
 #Create a canvas
 canvas= Canvas(root, width= 310, height= 210)
