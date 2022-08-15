@@ -9,8 +9,8 @@ PyInstaller.__main__.run([
     '--windowed'
 ])
 
-
-# Zip the dist folder
+# Zip the dist AND Origini folder 
 import shutil
 shutil.make_archive('AtleticaLevante', 'zip', 'dist')
+
 
