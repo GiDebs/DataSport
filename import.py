@@ -6,6 +6,7 @@
 from importlib.resources import path
 import ntpath
 import shutil
+import os
 from textwrap import fill
 from tkinter import*
 from tkinter import filedialog
@@ -20,17 +21,16 @@ root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\Icons\AtlLev1.ico")
 class Globals:
     filename = None
 
-# Fuunction that ask the path of the new origin and save it in the Origin directory
+# Fuunction that ask for the path of the new origin and save it in the Origin directory
 def Openfile():
-    Globals.filename = filedialog.askopenfilenames(initialdir="\Desktop ", 
+    filename = filedialog.askopenfilename(initialdir="\Desktop ", 
     title="Seleziona file", filetypes=(("Formato testo","*.csv"),("All Files","*.*")))
-    origin = str(Globals.filename)
-    origin1 = origin.replace("(","").replace(",", "").replace(")", "").replace("/", "\\").replace("'","")
-    origin2 = ntpath.basename(origin1)
-    targhet = "C:/Users/Giulio/Documents/GitHub/DataSport/Origini" + "/" + origin2
-    targhet1 = targhet.replace("/", "\\")
-    print(targhet1)
-    shutil.copyfile(origin1, targhet1)
+    # Extract the name of the new file selected by the user
+    origin = ntpath.basename(filename)
+    # Define the targhet directory
+    targhet = os.path.join(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini", origin)
+    #Copy the new file in the targhet directory
+    shutil.copyfile(filename, targhet)
 #
 # Add Image to the left
 #Create a canvas
