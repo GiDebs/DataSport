@@ -7,7 +7,7 @@ import pandas as pd
 
 df = pd.read_csv(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini\30_05_22-03_07_22.csv")
 
-def generate_table(dataframe , max_rows=10):
+def generate_table(dataframe , max_rows=100):
     return html.Table([html.Thead(
             html.Tr([html.Th(col) for col in dataframe.columns])
         ),
