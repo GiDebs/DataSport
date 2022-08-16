@@ -12,12 +12,15 @@ from tkinter import*
 from tkinter import filedialog
 #from tkinter.ttk import Labelframe
 from PIL import Image,ImageTk
+from dash import Dash,html
+import pandas as pd
 
 root = Tk()
 root.title("Importazione dati")
 root.geometry("680x220")
 root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\Icons\AtlLev1.ico")
-
+class Globals:
+    global targhet 
 
 # Fuunction that ask for the path of the new origin and save it in the Origin directory
 def Openfile():
@@ -26,10 +29,13 @@ def Openfile():
     # Extract the name of the new file selected by the user
     origin = ntpath.basename(filename)
     # Define the targhet directory
-    targhet = os.path.join(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini", origin)
+    Globals.targhet = os.path.join(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini", origin)
     #Copy the new file in the targhet directory
-    shutil.copyfile(filename, targhet)
+    shutil.copyfile(filename, Globals.targhet)
+    
 
+  
+#Function to generate a table and send it online
 def generate_table(dataframe , max_rows=100):
     return html.Table([html.Thead(
             html.Tr([html.Th(col) for col in dataframe.columns])
@@ -40,6 +46,7 @@ def generate_table(dataframe , max_rows=100):
             ]) for i in range(min(len(dataframe), max_rows))
         ])
     ])
+
 
 # Add Image to the left
 #Create a canvas
@@ -82,25 +89,17 @@ Extbtn = Button(frame3, text="Exit", font='Helvetica 10', command=root.destroy)
 #packing in frame 2
 label3.grid(row=0, column=0, padx=10, pady=10)
 Extbtn.grid(row=0, column=1, padx=10, pady=10)
-
 root.mainloop()
 
-#Import on a web app
-from dash import Dash,html
-import pandas as pd
-
-
-#newData = open(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini\30_05_22-03_07_22.csv")
-
-df = pd.read_csv(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini\30_05_22-03_07_22.csv")
+#Read the imported file
+df = pd.read_csv(Globals.targhet) 
 
 app = Dash(__name__)
-
 app.layout = html.Div([
     html.H4(children='Workouts'),
     generate_table(df)
 ])
-
 if __name__ == '__main__':
     app.run_server(debug=True)
+
 

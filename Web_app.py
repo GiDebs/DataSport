@@ -5,7 +5,7 @@ import pandas as pd
 
 #newData = open(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini\30_05_22-03_07_22.csv")
 
-df = pd.read_csv(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini\30_05_22-03_07_22.csv")
+df = pd.read_csv(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini\2022-05-30-2022-07-03.csv")
 
 def generate_table(dataframe , max_rows=100):
     return html.Table([html.Thead(
