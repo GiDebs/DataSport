@@ -14,7 +14,6 @@ directory = "Origini"
 parent_dir = r"C:\Users\Giulio\Documents\GitHub\DataSport\dist"
 path = os.path.join(parent_dir, directory)
 os.mkdir(path)
-print(path)
 # Zip the dist folder
 import shutil
 shutil.make_archive('AtleticaLevante', 'zip', 'dist')

@@ -3,6 +3,7 @@
 #Then I import it in web_app
 
 #from binhex import getfileinfo
+from gc import callbacks
 from importlib.resources import path
 import ntpath
 import shutil
@@ -12,9 +13,9 @@ from tkinter import*
 from tkinter import filedialog
 #from tkinter.ttk import Labelframe
 from PIL import Image,ImageTk
-from dash import Dash,html
-import pandas as pd
 
+
+#Creation of the GUI
 root = Tk()
 root.title("Importazione dati")
 root.geometry("680x220")
@@ -89,17 +90,36 @@ Extbtn = Button(frame3, text="Exit", font='Helvetica 10', command=root.destroy)
 #packing in frame 2
 label3.grid(row=0, column=0, padx=10, pady=10)
 Extbtn.grid(row=0, column=1, padx=10, pady=10)
+
 root.mainloop()
+
+from dash import Dash, dcc, Output, Input 
+import dash_bootstrap_components as dbc 
+import pandas as pd
 
 #Read the imported file
 df = pd.read_csv(Globals.targhet) 
 
 app = Dash(__name__)
-app.layout = html.Div([
-    html.H4(children='Workouts'),
-    generate_table(df)
-])
+
+mytext = dcc.Markdown(children='')
+dropdown = dcc.Dropdown(df.columns.values[0:],
+                        value='Title',
+                        clearable=False)
+
+app.layout = dbc.Container([mytext, dropdown])
+
+@app.callback(
+    Output = (mytext, 'children'),
+    Input = (dropdown, 'value')
+)
+def select_column(column_name):
+    return('# '+column_name)
+
+
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+
 
 
