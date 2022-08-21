@@ -14,15 +14,6 @@ from tkinter import filedialog
 #from tkinter.ttk import Labelframe
 from PIL import Image,ImageTk
 
-
-#Creation of the GUI
-root = Tk()
-root.title("Importazione dati")
-root.geometry("680x220")
-root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\Icons\AtlLev1.ico")
-class Globals:
-    str(targhet="")
-
 # Fuunction that ask for the path of the new origin and save it in the Origin directory
 def Openfile():
     filename = filedialog.askopenfilename(initialdir="\Desktop ", 
@@ -38,10 +29,9 @@ def CreateWebApp():
     from dash import Dash, dcc, Output, Input 
     import dash_bootstrap_components as dbc 
     import pandas as pd
-    from io import StringIO #In order to read the .csv in the form of a global variable
-
+    #from io import StringIO #In order to read the .csv in the form of a global variable
     #Read the imported file
-    #strtarghet = StringIO(Globals.targhet)
+    #strtarghet = str(Globals.targhet)
     df = pd.read_csv(Globals.targhet) 
     app = Dash(__name__)
 
@@ -59,11 +49,18 @@ def CreateWebApp():
     def select_column(column_name):
         return('# '+column_name)
 
-    root.destroy
-    if __name__ == '__main__':
-        app.run_server(debug=True)
     
+    if __name__ == '__main__':
+        app.run(debug=True, use_reloader=False) #
 
+#Creation of the GUI
+root = Tk()
+root.title("Importazione dati")
+root.geometry("680x220")
+root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\Icons\AtlLev1.ico")
+
+class Globals:
+    global targhet
 
 # Add Image to the left
 #Create a canvas
