@@ -8,7 +8,7 @@ This project aims at creating an web app application called *DataSport* to keep 
 ## Where the data will come from
 The main source of data will be from the TrainingPeaks .csv files. It could be possible to implement the database with data from Gramin Connect .csv files in order to collect more informations and provide a more detailed Recap.
 
-## How the excel file will be organized
+## How the program will be organized
 - There will be Graphic User Interface that will ask something to the user: Import new data / See the existing analysis (Dashboard) / Exit the program 
 - I would like to organize the window like a tree. From the Dashboard you will see the main overall data, and you can zoon the details of it in different sheets.
 - There will be a sheet called *AllWorkouts* where i will see all my activities, and if possible add filters like in excel.
@@ -17,6 +17,8 @@ The main source of data will be from the TrainingPeaks .csv files. It could be p
 
 ### The Current issues
 - Not sure if the best way to do this is creating a web app or creating a desktop app. Need first to learn the difference and understand which files they require to run
+- Now I can run the GUI, ask to open the latest file (could be the last week workouts summary in .csv) and save it in the target repository. Then panda read the file, parse the data, open the dashboard and see the graphs and all the fancy things. BUT I need to solve this: how to store past data and show them WITH the latest uploaded data??? Is it possible to save a dashboard?? How all the Flask server thing works and operate??
+
 
 ### **Useful Links for the beginner me**
 [Basic writing and formatting syntax of GitHub](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
