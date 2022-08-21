@@ -3,7 +3,7 @@ from dash import Dash, html
 import pandas as pd
 
 #df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv')
-df = pd.read_csv(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini\30_05_22-03_07_22.csv")
+df = pd.read_csv("C:\Users\Giulio\Documents\GitHub\DataSport\Origini\2022-08-08-2022-08-14.csv")
 
 def generate_table(dataframe, max_rows=10):
     return html.Table([

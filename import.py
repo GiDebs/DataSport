@@ -21,7 +21,7 @@ root.title("Importazione dati")
 root.geometry("680x220")
 root.iconbitmap(r"C:\Users\Giulio\Documents\GitHub\DataSport\Icons\AtlLev1.ico")
 class Globals:
-    global targhet 
+    str(targhet="")
 
 # Fuunction that ask for the path of the new origin and save it in the Origin directory
 def Openfile():
@@ -33,20 +33,36 @@ def Openfile():
     Globals.targhet = os.path.join(r"C:\Users\Giulio\Documents\GitHub\DataSport\Origini", origin)
     #Copy the new file in the targhet directory
     shutil.copyfile(filename, Globals.targhet)
-    
 
-  
-#Function to generate a table and send it online
-def generate_table(dataframe , max_rows=100):
-    return html.Table([html.Thead(
-            html.Tr([html.Th(col) for col in dataframe.columns])
-        ),
-        html.Tbody([
-            html.Tr([
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), max_rows))
-        ])
-    ])
+def CreateWebApp():
+    from dash import Dash, dcc, Output, Input 
+    import dash_bootstrap_components as dbc 
+    import pandas as pd
+    from io import StringIO #In order to read the .csv in the form of a global variable
+
+    #Read the imported file
+    #strtarghet = StringIO(Globals.targhet)
+    df = pd.read_csv(Globals.targhet) 
+    app = Dash(__name__)
+
+    mytext = dcc.Markdown(children='')
+    dropdown = dcc.Dropdown(df.columns.values[0:],
+                        value='Title',
+                        clearable=False)
+
+    app.layout = dbc.Container([mytext, dropdown])
+
+    @app.callback(
+        Output(mytext, 'children'),
+        Input(dropdown, 'value')
+    )
+    def select_column(column_name):
+        return('# '+column_name)
+
+    root.destroy
+    if __name__ == '__main__':
+        app.run_server(debug=True)
+    
 
 
 # Add Image to the left
@@ -76,7 +92,7 @@ frame2 = LabelFrame(root)
 frame2.grid(row=1, column=1, padx=10, pady=10)
 #defining objects in frame 1
 label2 = Label(frame2, text="Vedere analisi                      ", font='Helvetica 11 bold')
-Dashbtn = Button(frame2, text="Dashboard", command=generate_table, font='Helvetica 10')
+Dashbtn = Button(frame2, text="Dashboard", command= CreateWebApp, font='Helvetica 10')
 #packing in frame 2
 label2.grid(row=0, column=0, padx=10, pady=10)
 Dashbtn.grid(row=0, column=1, padx=10, pady=10)
@@ -92,34 +108,3 @@ label3.grid(row=0, column=0, padx=10, pady=10)
 Extbtn.grid(row=0, column=1, padx=10, pady=10)
 
 root.mainloop()
-
-from dash import Dash, dcc, Output, Input 
-import dash_bootstrap_components as dbc 
-import pandas as pd
-
-#Read the imported file
-df = pd.read_csv(Globals.targhet) 
-
-app = Dash(__name__)
-
-mytext = dcc.Markdown(children='')
-dropdown = dcc.Dropdown(df.columns.values[0:],
-                        value='Title',
-                        clearable=False)
-
-app.layout = dbc.Container([mytext, dropdown])
-
-@app.callback(
-    Output = (mytext, 'children'),
-    Input = (dropdown, 'value')
-)
-def select_column(column_name):
-    return('# '+column_name)
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
-
-
-
-
