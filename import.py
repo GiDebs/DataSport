@@ -2,7 +2,6 @@
 #I ask to select the database .csv for the import
 #Then I import it in web_app
 
-#from binhex import getfileinfo
 from gc import callbacks
 from importlib.resources import path
 import ntpath
@@ -11,7 +10,6 @@ import os
 from textwrap import fill
 from tkinter import*
 from tkinter import filedialog
-#from tkinter.ttk import Labelframe
 from PIL import Image,ImageTk
 
 # Fuunction that ask for the path of the new origin and save it in the Origin directory
@@ -29,11 +27,11 @@ def CreateWebApp():
     from dash import Dash, dcc, Output, Input 
     import dash_bootstrap_components as dbc 
     import pandas as pd
-    #from io import StringIO #In order to read the .csv in the form of a global variable
-    #Read the imported file
-    #strtarghet = str(Globals.targhet)
+    from waitress import serve #In order to use a production WSGI server (such as waitress) instead of a not secue or stable development server
+    from flask import Flask
     df = pd.read_csv(Globals.targhet) 
-    app = Dash(__name__)
+    #app = Dash(__name__)
+    app = Flask(__name__)
 
     mytext = dcc.Markdown(children='')
     dropdown = dcc.Dropdown(df.columns.values[0:],
@@ -51,7 +49,9 @@ def CreateWebApp():
 
     
     if __name__ == '__main__':
-        app.run(debug=True, use_reloader=False) #
+        #app.run(debug=True, use_reloader=False) # this command reload the GUI interface and open the same window.
+        serve(app)                               # Need to add use_reloader=Fales in order to avoid the reload of 
+                                                # the entire program!
 
 #Creation of the GUI
 root = Tk()
